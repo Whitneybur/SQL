@@ -53,4 +53,14 @@ WHERE Feb.Quantity>2
 AND length(orderid) = 6
 AND orderid <> 'Order ID';
 
+8. --Find employee IDs only.
+SELECT employee_ID
+FROM employees
+WHERE employee_ID LIKE '14_9';
+
+9. --Find employee IDs only.
+SELECT order_ID
+FROM BIT_DB> MarSales
+WHERE order_ID LIKE '16_0%';
+
 
