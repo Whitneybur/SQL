@@ -63,4 +63,44 @@ SELECT order_ID
 FROM BIT_DB> MarSales
 WHERE order_ID LIKE '16_0%';
 
+10.--Find the sum of the quantity of products sold that have'headphones' fof February.
+SELECT SUM(Quantity), Product
+FROM BIT_DB.FebSales
+WHERE Product LIKE '%Headphones%'
+AND length(orderid) = 6
+AND orderid <> 'Order ID'
+GROUP BY Product
 
+11.--Find the average amount spent/number of accounts for February.
+SELECT sum(quantity*price)/count(cust.acctnum)
+FROM BIT_DB.FebSales Feb
+LEFT JOIN BIT_DB.customers cust
+ON FEB.orderid=cust.order_id
+WHERE length(orderid) = 6
+AND orderid <> 'Order ID'
+
+12.--Find order ids from Georgia(GA) where the order id has an average price greater than $1000.00 Only find orders from dates beginning with '04/1'.
+SELECT orderID
+FROM BIT_DB.AprSales
+WHERE orderdate LIKE '04/1%'
+AND location LIKE '%GA%'
+AND length(orderid) = 6
+AND orderid <> 'Order ID'
+GROUP BY orderID
+HAVING AVG(price) > 1000;
+
+13.--Find the location and orderid for orders made during MaySales.
+SELECT location, orderID
+FROM BIT_DB.MaySales
+WHERE orderID LIKE '1943_5'
+AND length(orderid) = 6
+AND orderid <> 'Order ID'
+ORDER BY orderID;
+
+14.--Find the one product that generated the most revenue in January.
+SELECT product,
+sum(quantity*price)
+FROM BIT_DB.JanSales
+GROUP BY product
+ORDER BY sum(quantity*price) desc
+LIMIT 1
